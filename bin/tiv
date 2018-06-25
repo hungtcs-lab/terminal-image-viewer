@@ -1,0 +1,42 @@
+#!/usr/bin/env node
+const path = require('path');
+const Jimp = require('jimp');
+const chalk = require('chalk');
+const package = require('../package.json');
+const program = require('commander');
+
+program
+  .version(package.version)
+  .usage('[options] <path or url to image file>')
+  .option('-c, --character [character]', 'character to filled', /\S/, '@')
+  .option('-w, --width     [width]', 'resize image width', parseInt)
+  .option('-h, --height    [height]', 'resize image height', parseInt)
+  .parse(process.argv);
+
+let [ imagePath ] = program.args;
+
+if(!imagePath) {
+  program.outputHelp(text => chalk.red(text));
+  process.exit(1);
+}
+
+imagePath = path.resolve(imagePath);
+
+Jimp.read(imagePath).then(image => {
+  if(program.width || program.height) {
+    let { width=Jimp.AUTO, height=Jimp.AUTO } = program;
+    return image.resize(width, height);
+  }
+  return image;
+}).then(image => {
+  image.scan(0, 0, image.bitmap.width, image.bitmap.height, function (x, y, idx) {
+    let { r, g, b, a } = Jimp.intToRGBA(image.getPixelColor(x, y));
+    process.stdout.write(chalk.rgb(r, g, b).bold(program.character || '@'));
+    if(x === image.bitmap.width - 1) {
+      process.stdout.write('\n');
+    }
+  });
+  process.stdout.write('\n');
+}).catch(err => {
+  console.error(err);
+});

@@ -1,0 +1,21 @@
+{
+  "name": "terminal-image-viewer",
+  "version": "1.0.0",
+  "main": "bin/tiv",
+  "author": "鸿则 <hungtcs@163.com>",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^2.15.1",
+    "jimp": "^0.2.28"
+  },
+  "description": "display image via character under terminal",
+  "repository": "https://github.com/hungtcs-lab/terminal-image-viewer.git",
+  "private": false,
+  "bin": {
+    "tiv": "./bin/tiv"
+  },
+  "keywords": [
+    "terminal", "character", "image", "funny"
+  ]
+}
