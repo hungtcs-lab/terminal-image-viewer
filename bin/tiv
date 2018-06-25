@@ -38,5 +38,5 @@ Jimp.read(imagePath).then(image => {
   });
   process.stdout.write('\n');
 }).catch(err => {
-  console.error(err);
+  console.error(chalk.red(`ERROR:\n\t${ err.message }`));
 });

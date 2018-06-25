@@ -1,12 +1,12 @@
 Terminal Image Viewer
 ====
 
-### Install
+### 安装
 ```
 npm install -g terminal-image-viewer
 ```
 
-### Using
+### 使用方法
 ```
 Usage: tiv [options] <path or url to image file>
 
@@ -19,5 +19,5 @@ Options:
   -h, --help                   output usage information
 ```
 
-### Prompt
-- using `TERM=xterm-256color` if the terminal not display color
+### 注意事项
+- 如果终端不能正确显示色彩可以尝试设置环境变量`TERM=xterm-256color`
